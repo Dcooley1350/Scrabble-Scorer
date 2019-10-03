@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Scrabble.Models;
+using System;
 
 namespace Scrabble.Tests
 {
@@ -13,7 +14,7 @@ namespace Scrabble.Tests
         public void Setup()
         {
             newWord = new Word("Scrabble");
-            char[] lowerArray = {'s','c','r','a','b','b','l','e'};
+            lowerArray = new char[] {'s','c','r','a','b','b','l','e'};
         }
 
         [TestCleanup]
@@ -41,7 +42,6 @@ namespace Scrabble.Tests
         {   
             string lowerString = newWord.MasterWord.ToLower();
             char[] charArray = lowerString.ToCharArray();
-            
             CollectionAssert.AreEqual(charArray,lowerArray);
         }
         [TestMethod]
@@ -49,6 +49,57 @@ namespace Scrabble.Tests
         {
             newWord.AwardOnePoint(lowerArray);
 
+            int correctScore = 5;
+            Assert.AreEqual(newWord.WordScore, correctScore);
+        }
+        [TestMethod]
+        public void AwardTwoPoint_IncrementScoreByTwo_Int()
+        {
+            newWord.AwardTwoPoint(lowerArray);
+            int correctScore = 0;
+            Assert.AreEqual(newWord.WordScore,correctScore);
+        }
+        [TestMethod]
+        public void AwardThreePoint_IncrementScoreByThree_Int()
+        {
+            newWord.AwardThreePoint(lowerArray);
+            int correctScore = 9;
+            Assert.AreEqual(newWord.WordScore,correctScore);
+        }
+        [TestMethod]
+        public void AwardFourPoint_IncrementScoreByFour_Int()
+        {
+            newWord.AwardFourPoint(lowerArray);
+            int correctScore = 0;
+            Assert.AreEqual(newWord.WordScore,correctScore);
+        }
+                [TestMethod]
+        public void AwardFivePoint_IncrementScoreByFive_Int()
+        {
+            newWord.AwardFivePoint(lowerArray);
+            int correctScore = 0;
+            Assert.AreEqual(newWord.WordScore,correctScore);
+        }
+        [TestMethod]
+        public void AwardEightPoint_IncrementScoreByEight_Int()
+        {
+            newWord.AwardEightPoint(lowerArray);
+            int correctScore = 0;
+            Assert.AreEqual(newWord.WordScore,correctScore);
+        }
+        [TestMethod]
+        public void AwardTenPoint_IncrementScoreByTen_Int()
+        {
+            newWord.AwardTenPoint(lowerArray);
+            int correctScore = 0;
+            Assert.AreEqual(newWord.WordScore,correctScore);
+        }
+        [TestMethod]
+        public void AwardPoints_IncrementByAllPointRules_Int()
+        {
+            newWord.AwardPoints(lowerArray);
+            int correctScore = 14;
+            Assert.AreEqual(newWord.WordScore,correctScore);
         }
     }
 }
